@@ -14,5 +14,9 @@
 *.rbxl.lock
 *.rbxlx.lock
 
+# flamework-test's working files. The places `bun run test` makes (test.rbxl, test.patched.rbxl)
+# are root place files, ignored above.
+/build
+
 # Personal overrides of .env, read by the Flamework build.
 .env.local

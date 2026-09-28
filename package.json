@@ -8,12 +8,14 @@
 		"watch": "rbxtsc -w",
 		"serve": "rojo serve",
 		"place": "rojo build -o place.rbxl",
+		"test": "bun scripts/test.mjs",
 		"format": "prettier --write src"
 	},
 	"dependencies": {
 		"@flamework-experimental/components": "2.0.0-alpha.4",
 		"@flamework-experimental/core": "2.0.0-alpha.4",
 		"@flamework-experimental/networking": "2.0.0-alpha.4",
+		"@flamework-experimental/testing": "2.0.0-alpha.4",
 		"@rbxts/services": "^1.6.0"
 	},
 	"devDependencies": {

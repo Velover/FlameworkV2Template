@@ -32,15 +32,42 @@ src/
     components/         components (server)
     network.ts          the server's events and functions, with middleware
     middleware/         networking middleware
+    tests/              tests (server)
   client/
     runtime.client.ts   entry point: registers the folders below and ignites
     controllers/        providers (client)
     components/         components (client)
     network.ts          the client's events and functions
+    tests/              tests (client)
   shared/
     network.ts          the network declarations
     levels.ts, tags.ts  plain modules both realms use
+    tests/              tests both realms run
+tests/
+  place.rbxlx           the place the tests run in
+scripts/
+  test.mjs              what `bun run test` runs
 ```
+
+## Tests
+
+```sh
+bun run test
+```
+
+This builds the game with the `testing` scope and lays the build over `tests/place.rbxlx`. It then
+runs the tests in Studio, on the server and on the client, and prints each realm's results. Last,
+whatever the result, it rebuilds `out/` without the `testing` scope: the tests are still compiled
+in, but nothing loads them.
+
+- **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
+  [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
+- **Other builds:** only a test build loads the tests. A run stopped with Ctrl+C leaves the test
+  build in `out/` (and its Studio window, if the play session had started): run `bun run build`
+  before `rojo serve`. The next `bun run test` closes the stale window. Every run leaves `test.rbxl`,
+  `test.patched.rbxl` and `build/` behind; they are git-ignored.
+- **The test place:** `tests/place.rbxlx` has what a new Baseplate place has: deferred signals, a
+  baseplate and a spawn.
 
 ## Docs
 
@@ -56,6 +83,7 @@ Flamework website documents v1, most of which no longer applies.
 2. Change the title of this README and of `CLAUDE.md`, and the first paragraph of `CLAUDE.md`.
 3. Delete the coin example: `src/*/components/coin*.ts`, `src/server/services/coin-service.ts`,
    `src/client/controllers/coin-controller.ts`, `src/shared/levels.ts`, and its members in
-   `src/*/network.ts` and `src/shared/tags.ts`. Every folder an entry point registers must keep at
-   least one module, or lose its line in the entry point: the build warns about each one that does
-   not.
+   `src/*/network.ts` and `src/shared/tags.ts`. Delete its tests too: `src/server/tests/coin*.ts`,
+   `src/client/tests/coin-spin.ts` and `src/shared/tests/levels.ts`. Every folder an entry point
+   registers must keep at least one module, or lose its line in the entry point: the build warns
+   about each one that does not.
