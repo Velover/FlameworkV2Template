@@ -8,9 +8,12 @@ example (press F to spawn a coin, touch it to collect it) is there to be replace
 - roblox-ts 3.0.0 (`rbxtsc`) compiles `src/` to Luau in `out/`. TypeScript is pinned to 5.5.3, the
   version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the place from `default.project.json`.
-- **Flamework v2 alpha**, all four pinned exactly; upgrade them together, to one release:
-  - `@flamework-experimental/core`, `components` and `networking` 2.0.0-alpha.5;
+- **Flamework v2 alpha**, all five pinned exactly; upgrade them together, to one release:
+  - `@flamework-experimental/core`, `components`, `networking` and `testing` 2.0.0-alpha.5;
   - `@flamework-experimental/transformer` 2.0.0-alpha.6, the tsconfig plugin.
+  - `testing` is in every build, not only test builds: both entry points include its
+    `TestingPlugin`, which stays inert without the `testing` scope. A mismatched version breaks
+    the game too.
 - Not v1: `@flamework/*` and `rbxts-transformer-flamework` are v1, and the Flamework website
   (flamework.fireboltofdeath.dev) documents v1. Don't use v1 docs, or v1's API from memory.
 - Package manager: bun, one lockfile (`bun.lock`).
@@ -46,6 +49,7 @@ commands use npm; use bun here.
   with, so restart it after changing either.
 - `bun run serve` runs `rojo serve` to sync into Studio, and `bun run place` builds `place.rbxl`.
   Build first: the project maps `out/` and `include/`.
+- `bun run test` runs the tests in Studio; see [Tests](#tests).
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
   `@flamework-experimental/*` package with `bun add --exact`, at the version of the release the
@@ -74,6 +78,22 @@ commands use npm; use bun here.
 - Generated and git-ignored, never edited: `out/`, `include/` (including `include/flamework/`) and
   `flamework.build`. `flamework.config.json` is config: commit it and keep its `$schema` line.
 
+## Tests
+
+- `bun run test` (`scripts/test.mjs`) builds with `FLAMEWORK_SCOPES=testing` and makes `test.rbxl`.
+  `flamework-test` then lays that over `tests/place.rbxlx` and runs every section in Studio, on the
+  server and then on the client. It needs Studio's "MCP server" setting on, and `lune`. A failure
+  exits non-zero.
+- Tests live in `src/server/tests`, `src/client/tests` and `src/shared/tests` (both realms). Each
+  test file is a `@Provider({ activeIn: ["testing"] })` that calls `defineTests` in `onStart`;
+  `src/server/tests/players.ts` is a plain module of helpers beside them. The entry points register
+  those folders only under the `testing` scope. `.claude/rules/testing.md` has the details.
+- Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` without the scope, so
+  `rojo serve` and `bun run place` never ship the test host. A run stopped with Ctrl+C skips it,
+  leaving the testing build in `out/` (and its Studio window, if the play session had started): run
+  `bun run build`. The next `bun run test` closes the stale window. Every run leaves `test.rbxl`,
+  `test.patched.rbxl` and `build/` behind; they are git-ignored.
+
 ## Flamework v2 rules
 
 - Every singleton is `@Provider()` from core, on both realms. There is no `@Service` or
@@ -91,7 +111,8 @@ commands use npm; use bun here.
   `provider ID was registered more than once`.
 - Registration requires every ModuleScript under a registered folder at startup. A module that
   errors at its top level fails ignition. Keep modules that are neither providers nor components
-  outside those folders, as `network.ts` and `middleware/` are.
+  outside those folders, as `network.ts` and `middleware/` are. The exception is a plain helper
+  that does nothing as it loads and serves only that folder, such as `src/server/tests/players.ts`.
 - Classes are found whether exported or not, if declared at the top level of a file or namespace.
   Export them anyway when another file, or a test, imports them.
 - Inject providers through the constructor. `Dependency<T>()` is for code without a constructor,
