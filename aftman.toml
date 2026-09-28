@@ -1,0 +1,3 @@
+# Tools installed by `aftman install` or `rokit install` (Rokit reads this file too).
+[tools]
+rojo = "rojo-rbx/rojo@7.7.0"
