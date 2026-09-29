@@ -14,6 +14,8 @@ For anything not covered here, read the guides of the installed version:
 - `node_modules/@flamework-experimental/core/docs/guide/03-providers.md`
 - `node_modules/@flamework-experimental/core/docs/guide/04-lifecycle-events.md`
 - `node_modules/@flamework-experimental/core/docs/guide/02-modules.md`, for `Dependency<T>()`
+- `node_modules/@flamework-experimental/core/docs/guide/07-macros.md`, "Paths", for
+  `requireModules`
 - `node_modules/@flamework-experimental/core/docs/guide/09-project-structure.md`, for the layout
   and `flamework.config.json`
 - `node_modules/@flamework-experimental/core/docs/guide/10-migrating-from-v1.md`, before porting v1
@@ -74,9 +76,13 @@ Flamework.createModule()
 - Each realm ignites one module, in its entry point, and nothing else ignites one.
 - Register a new folder in the entry point of each realm that uses it. The path is a string
   literal and a source path (`"src/..."`), under a folder `default.project.json` maps.
-- A registered folder must exist and contain a file. The build passes without one, and the
-  `registerProviders` or `fromPath` call then waits forever in `WaitForChild`.
+- A registered folder must exist, spelled as on disk, and hold a module. The build warns at the
+  call otherwise. A missing folder makes the call wait forever at runtime, warning after 5 s; an
+  empty one registers nothing, and waits in a fresh clone, which lacks it.
 - Folders must not overlap, and registration requires every ModuleScript in them at startup.
+- A folder of modules that only do their work as they load (commands that register themselves,
+  say) is loaded with `requireModules("src/...")` from core: v1's `addPaths` for such a folder. A
+  folder inside a registered folder needs no call.
 - There is no `@Service`, `@Controller`, `@Optional`, `Flamework.addPaths` or `Flamework.ignite()`.
 
 ## Config

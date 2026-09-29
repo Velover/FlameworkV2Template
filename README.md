@@ -57,4 +57,5 @@ Flamework website documents v1, most of which no longer applies.
 3. Delete the coin example: `src/*/components/coin*.ts`, `src/server/services/coin-service.ts`,
    `src/client/controllers/coin-controller.ts`, `src/shared/levels.ts`, and its members in
    `src/*/network.ts` and `src/shared/tags.ts`. Every folder an entry point registers must keep at
-   least one file, or lose its line in the entry point.
+   least one module, or lose its line in the entry point: the build warns about each one that does
+   not.

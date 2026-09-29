@@ -63,5 +63,9 @@ since v1.
 
 - `networking.serialization` in `flamework.config.json` packs every payload into a buffer. It is
   off here. Both realms build from one config, so they always agree on the format.
+- To pack one heavy member with the switch off, mark it: `Networking.SerializedReliable<...>` or
+  `SerializedUnreliable<...>` for an event, `Networking.Serialized<...>` for a function (`Raw*`
+  does the opposite). The build refuses a call that may reach members packed differently, such as
+  a helper returning either a `Serialized` member or a plain one.
 - With `transformer.obfuscation` on, remote names change with every build: never look a remote up
   by name.

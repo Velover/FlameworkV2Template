@@ -19,16 +19,7 @@
 						"$path": "node_modules/@rbxts"
 					},
 					"@flamework-experimental": {
-						"$className": "Folder",
-						"core": {
-							"$path": "node_modules/@flamework-experimental/core"
-						},
-						"components": {
-							"$path": "node_modules/@flamework-experimental/components"
-						},
-						"networking": {
-							"$path": "node_modules/@flamework-experimental/networking"
-						}
+						"$path": "node_modules/@flamework-experimental"
 					}
 				}
 			},
