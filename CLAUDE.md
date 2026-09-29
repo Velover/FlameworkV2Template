@@ -88,11 +88,11 @@ commands use npm; use bun here.
   test file is a `@Provider({ activeIn: ["testing"] })` that calls `defineTests` in `onStart`;
   `src/server/tests/players.ts` is a plain module of helpers beside them. The entry points register
   those folders only under the `testing` scope. `.claude/rules/testing.md` has the details.
-- Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` without the scope, so
-  `rojo serve` and `bun run place` never ship the test host. A run stopped with Ctrl+C skips it,
-  leaving the testing build in `out/` (and its Studio window, if the play session had started): run
-  `bun run build`. The next `bun run test` closes the stale window. Every run leaves `test.rbxl`,
-  `test.patched.rbxl` and `build/` behind; they are git-ignored.
+- Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` with `FLAMEWORK_SCOPES`
+  set to nothing, so `rojo serve` and `bun run place` never ship the test host. Never put the scope
+  in `.env` or `.env.local`: every other build reads them. A run stopped with Ctrl+C skips the
+  rebuild, and leaves its Studio window open if Studio had started: run `bun run build`, and the next
+  `bun run test` closes that window. Every run leaves `test.rbxl` and `test.patched.rbxl` behind; they are git-ignored.
 
 ## Flamework v2 rules
 

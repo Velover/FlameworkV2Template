@@ -17,23 +17,43 @@ For anything not covered here, read
   2. builds `test.rbxl`;
   3. lays that over `tests/place.rbxlx`;
   4. runs every section in Studio: the server's first, then the client's, in one play session;
-  5. rebuilds `out/` without the scope, whatever the result. It exits with the first failing
-     step's code (127 for a tool it can't find), or else the rebuild's.
+  5. rebuilds `out/` with `FLAMEWORK_SCOPES` set to nothing, whatever the result, so a scope in
+     `.env.local` or in your shell can't come back. It exits with the first failing step's code
+     (127 for a tool it can't find), or else the rebuild's.
 - It needs Studio with "MCP server" on in its Assistant settings, and `lune` (`aftman.toml`). It
   exits non-zero when a test fails.
+- Never put `FLAMEWORK_SCOPES=testing` in `.env` or `.env.local`. Every other build reads them
+  (`bun run build`, `watch`, a release), and would ship the test host.
 - Extra arguments go to `flamework-test`:
   - `bun run test --sections levels` runs one section, and `--sections coin/<test name>` one test.
-  - A section only one realm has needs `--realm` too, as in `--realm server --sections coin`.
-    Otherwise the other realm reports `MISS matched nothing` and fails the run.
+  - `--sections` is judged across both realms. A section only the server has runs there, and the
+    client lists it as `not among the client's sections: coin` without failing. An entry no realm
+    has fails the run: `MISS matched nothing in any realm: coins`.
+  - `--realm server` or `--realm client` runs one realm. There, an entry that realm lacks fails
+    the run.
+  - The other flags (`--list`, `--keep`, `--timeout`) are in
+    `node_modules/@flamework-experimental/testing/README.md`.
 - A command it can't find (`rojo`, `flamework-test`) is reported as `<name> not found on PATH`,
-  and the rebuild still runs. Without `rbxtsc`, nothing is built at all: run `bun install`.
-- Every run leaves `test.rbxl`, `test.patched.rbxl` and `build/` behind; they are git-ignored.
+  and the rebuild still runs. Without `rbxtsc`, nothing is built at all: start it with
+  `bun run test`, which puts `node_modules/.bin` on the PATH, and run `bun install`.
+- The run opens its own Studio window. When it is done, it ends that window's process at once and
+  removes the window's lock file. The only other window it closes is one that shows this very
+  `test.patched.rbxl`, left from an earlier run: it asks first, and ends it after ten seconds.
+- Every run leaves `test.rbxl` and `test.patched.rbxl`, git-ignored with the other root places.
+  The patch's own files go to the system temp folder and are removed when the patch ends. `build/`
+  is only written by
+  `flamework-test`'s cloud commands, which this template doesn't use.
 - A run stopped with Ctrl+C skips the rebuild. It leaves:
   - the testing build in `out/`;
-  - its Studio window, still in a play session, if the session had started.
+  - its Studio window once Studio has started, in a play session if one had begun, with Studio's
+    `test.patched.rbxl.lock` beside the place;
+  - in the system temp folder, a `flamework-test-XXXXXX` folder if it stopped during the patch, and a
+    claim file under `flamework-test` if it stopped while waiting for the window. Both are harmless;
+    the next run takes the claim over.
 
   Run `bun run build` before `rojo serve` or `bun run place`, which would otherwise ship the test
-  host. The next `bun run test` closes the stale window itself.
+  host. The next `bun run test` closes the stale window itself (it asks, then ends it after ten
+  seconds) and removes its lock.
 
 ## Writing one
 
