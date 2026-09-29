@@ -62,10 +62,12 @@ in, but nothing loads them.
 
 - **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
   [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
-- **Other builds:** only a test build loads the tests. A run stopped with Ctrl+C leaves the test
-  build in `out/` (and its Studio window, if the play session had started): run `bun run build`
-  before `rojo serve`. The next `bun run test` closes the stale window. Every run leaves `test.rbxl`,
-  `test.patched.rbxl` and `build/` behind; they are git-ignored.
+- **One section:** `bun run test --sections levels` runs one section, in each realm that has it.
+- **Other builds:** only a test build loads the tests, so keep the `testing` scope out of `.env`
+  and `.env.local`, which every build reads. A run stopped with Ctrl+C leaves the test build in
+  `out/`, and its Studio window open if Studio had started: run `bun run build` before `rojo serve`. The next
+  `bun run test` closes that window. Every run leaves `test.rbxl` and `test.patched.rbxl` behind;
+  they are git-ignored.
 - **The test place:** `tests/place.rbxlx` has what a new Baseplate place has: deferred signals, a
   baseplate and a spawn.
 
