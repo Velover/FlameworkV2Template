@@ -9,8 +9,8 @@ example (press F to spawn a coin, touch it to collect it) is there to be replace
   version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the place from `default.project.json`.
 - **Flamework v2 alpha**, all four pinned exactly; upgrade them together, to one release:
-  - `@flamework-experimental/core`, `components` and `networking` 2.0.0-alpha.4;
-  - `@flamework-experimental/transformer` 2.0.0-alpha.5, the tsconfig plugin.
+  - `@flamework-experimental/core`, `components` and `networking` 2.0.0-alpha.5;
+  - `@flamework-experimental/transformer` 2.0.0-alpha.6, the tsconfig plugin.
 - Not v1: `@flamework/*` and `rbxts-transformer-flamework` are v1, and the Flamework website
   (flamework.fireboltofdeath.dev) documents v1. Don't use v1 docs, or v1's API from memory.
 - Package manager: bun, one lockfile (`bun.lock`).
@@ -48,8 +48,9 @@ commands use npm; use bun here.
   Build first: the project maps `out/` and `include/`.
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
-  `@flamework-experimental/*` package with `bun add --exact`, at the version the others are on. It
-  needs no mapping: `default.project.json` maps the whole scope.
+  `@flamework-experimental/*` package with `bun add --exact`, at the version of the release the
+  others come from (the monorepo CHANGELOG lists each release's versions; they differ per package).
+  It needs no mapping: `default.project.json` maps the whole scope.
 
 ## Where things live
 
