@@ -49,8 +49,10 @@ commands use npm; use bun here.
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
   `@flamework-experimental/*` package with `bun add --exact`, at the version of the release the
-  others come from (the monorepo CHANGELOG lists each release's versions; they differ per package).
-  It needs no mapping: `default.project.json` maps the whole scope.
+  others come from (the monorepo's
+  [CHANGELOG](https://github.com/Velover/ExperimentalFlameworkV2/blob/HEAD/CHANGELOG.md) lists
+  each release's versions; they differ per package). It needs no mapping: `default.project.json`
+  maps the whole scope.
 
 ## Where things live
 
