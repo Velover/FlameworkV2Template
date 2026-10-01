@@ -39,17 +39,16 @@ For anything not covered here, read
 - The run opens its own Studio window. When it is done, it ends that window's process at once and
   removes the window's lock file. The only other window it closes is one that shows this very
   `test.patched.rbxl`, left from an earlier run: it asks first, and ends it after ten seconds.
-- Every run leaves `test.rbxl` and `test.patched.rbxl`, git-ignored with the other root places.
-  The patch's own files go to the system temp folder and are removed when the patch ends. `build/`
-  is only written by
-  `flamework-test`'s cloud commands, which this template doesn't use.
+- Every run leaves `test.rbxl` and `test.patched.rbxl`, git-ignored with the other root places. The
+  patch's own files go to the system temp folder and are removed when the patch ends. `build/` is
+  only written by `flamework-test`'s cloud commands, which this template doesn't use.
 - A run stopped with Ctrl+C skips the rebuild. It leaves:
   - the testing build in `out/`;
   - its Studio window once Studio has started, in a play session if one had begun, with Studio's
     `test.patched.rbxl.lock` beside the place;
-  - in the system temp folder, a `flamework-test-XXXXXX` folder if it stopped during the patch, and a
-    claim file under `flamework-test` if it stopped while waiting for the window. Both are harmless;
-    the next run takes the claim over.
+  - in the system temp folder, a `flamework-test-XXXXXX` folder if it stopped during the patch, and
+    a claim file under `flamework-test` if it stopped while waiting for the window. Both are
+    harmless; the next run takes the claim over.
 
   Run `bun run build` before `rojo serve` or `bun run place`, which would otherwise ship the test
   host. The next `bun run test` closes the stale window itself (it asks, then ends it after ten

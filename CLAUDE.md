@@ -91,8 +91,9 @@ commands use npm; use bun here.
 - Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` with `FLAMEWORK_SCOPES`
   set to nothing, so `rojo serve` and `bun run place` never ship the test host. Never put the scope
   in `.env` or `.env.local`: every other build reads them. A run stopped with Ctrl+C skips the
-  rebuild, and leaves its Studio window open if Studio had started: run `bun run build`, and the next
-  `bun run test` closes that window. Every run leaves `test.rbxl` and `test.patched.rbxl` behind; they are git-ignored.
+  rebuild, and leaves its Studio window open if Studio had started: run `bun run build`, and the
+  next `bun run test` closes that window. Every run leaves `test.rbxl` and `test.patched.rbxl`
+  behind; they are git-ignored.
 
 ## Flamework v2 rules
 
