@@ -9,8 +9,9 @@ example (press F to spawn a coin, touch it to collect it) is there to be replace
   version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the place from `default.project.json`.
 - **Flamework v2 alpha**, all five pinned exactly; upgrade them together, to one release:
-  - `@flamework-experimental/core`, `components`, `networking` and `testing` 2.0.0-alpha.5;
-  - `@flamework-experimental/transformer` 2.0.0-alpha.6, the tsconfig plugin.
+  - `@flamework-experimental/core`, `networking` and `testing` 2.0.0-alpha.6, `components`
+    2.0.0-alpha.5;
+  - `@flamework-experimental/transformer` 2.0.0-alpha.7, the tsconfig plugin.
   - `testing` is in every build, not only test builds: both entry points include its
     `TestingPlugin`, which stays inert without the `testing` scope. A mismatched version breaks
     the game too.
@@ -44,7 +45,8 @@ commands use npm; use bun here.
 
 - `bun install`.
 - `bun run build` runs `rbxtsc`. It is the check: it must exit 0 and print no `error TS` and no
-  Flamework warning. The `[Flamework]` prefix is coloured even in a log, so search for `Flamework`.
+  Flamework warning. Colour codes can split `error TS` and `[Flamework]` even in a log, so search
+  a log for `error` and `Flamework`.
 - `bun run watch` rebuilds on change. It keeps the `flamework.config.json` and `.env` it started
   with, so restart it after changing either.
 - `bun run serve` runs `rojo serve` to sync into Studio, and `bun run place` builds `place.rbxl`.
@@ -53,8 +55,10 @@ commands use npm; use bun here.
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
   `@flamework-experimental/*` package with `bun add --exact`, at the version of the release the
-  others come from (the monorepo CHANGELOG lists each release's versions; they differ per package).
-  It needs no mapping: `default.project.json` maps the whole scope.
+  others come from (the monorepo's
+  [CHANGELOG](https://github.com/Velover/ExperimentalFlameworkV2/blob/HEAD/CHANGELOG.md) heads
+  each release with the versions it changed, which differ per package; one it leaves out keeps its
+  earlier version). It needs no mapping: `default.project.json` maps the whole scope.
 
 ## Where things live
 
