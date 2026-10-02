@@ -86,18 +86,22 @@ commands use npm; use bun here.
 
 - `bun run test` (`scripts/test.mjs`) builds with `FLAMEWORK_SCOPES=testing` and makes `test.rbxl`.
   `flamework-test` then lays that over `tests/place.rbxlx` and runs every section in Studio, on the
-  server and then on the client. It needs Studio's "MCP server" setting on, and `lune`. A failure
-  exits non-zero.
+  server and then on the client. It needs Studio's "MCP server" setting on, and `lune`. Each realm's
+  summary counts passed, failed and skipped tests. A failure exits non-zero; a skip does not, unless
+  the run has `--fail-on-skip`. Give a run nobody watches `--keep-awake`: while the display sleeps,
+  RenderStepped stops and `onRender` tests fail.
 - Tests live in `src/server/tests`, `src/client/tests` and `src/shared/tests` (both realms). Each
   test file is a `@Provider({ activeIn: ["testing"] })` that calls `defineTests` in `onStart`;
   `src/server/tests/players.ts` is a plain module of helpers beside them. The entry points register
-  those folders only under the `testing` scope. `.claude/rules/testing.md` has the details.
+  those folders only under the `testing` scope. When something known only at run time rules a test
+  out, it calls `skip(reason)`, which the summary lists; a plain `return` would count as a pass.
+  `.claude/rules/testing.md` has the details.
 - Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` with `FLAMEWORK_SCOPES`
   set to nothing, so `rojo serve` and `bun run place` never ship the test host. Never put the scope
   in `.env` or `.env.local`: every other build reads them. A run stopped with Ctrl+C skips the
-  rebuild, and leaves its Studio window open if Studio had started: run `bun run build`, and the
-  next `bun run test` closes that window. Every run leaves `test.rbxl` and `test.patched.rbxl`
-  behind; they are git-ignored.
+  rebuild, so `out/` keeps the test build: run `bun run build`. `flamework-test` still stops its
+  play session and closes its Studio window, in the seconds after the prompt comes back. Every run
+  leaves `test.rbxl` and `test.patched.rbxl` behind; they are git-ignored.
 
 ## Flamework v2 rules
 

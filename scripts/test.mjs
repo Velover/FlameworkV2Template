@@ -2,7 +2,9 @@
 // scope whatever happened, so out/ never keeps a build that hosts the tests (guide 12, "Setting
 // up"). Start it with `bun run test`, which puts node_modules/.bin on the PATH; run on its own,
 // `bun scripts/test.mjs` finds no rbxtsc, or a global one instead of the project's. Extra
-// arguments go to flamework-test, as in `bun run test --sections levels`.
+// arguments go to flamework-test, as in `bun run test --sections levels`. Ctrl+C is the
+// exception to "whatever happened": `bun run` ends this script at once, before the rebuild, and
+// flamework-test cleans up its own window and session.
 
 /** Runs a command in the terminal. Returns its exit code, or undefined when it can't be started. */
 function run(command, env = process.env) {
