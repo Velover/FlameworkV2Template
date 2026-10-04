@@ -1,6 +1,7 @@
 ---
 paths:
   - "src/*/tests/**/*.ts"
+  - "src/shared/fixtures/**/*.ts"
   - "tests/**"
 ---
 
@@ -12,14 +13,15 @@ For anything not covered here, read
 
 ## Running
 
-- `bun run test` (`scripts/test.mjs`) does five things:
-  1. builds with `FLAMEWORK_SCOPES=testing`;
-  2. builds `test.rbxl`;
-  3. lays that over `tests/place.rbxlx`;
-  4. runs every section in Studio: the server's first, then the client's, in one play session;
-  5. rebuilds `out/` with `FLAMEWORK_SCOPES` set to nothing, whatever the result, so a scope in
-     `.env.local` or in your shell can't come back. It exits with the first failing step's code
-     (127 for a tool it can't find), or else the rebuild's.
+- `bun run test` (`scripts/test.mjs`) does six things:
+  1. builds the plugin package (`rbxtsc -p package`);
+  2. builds the game with `FLAMEWORK_SCOPES=testing`;
+  3. builds `test.rbxl`;
+  4. lays that over `tests/place.rbxlx`;
+  5. runs every section in Studio: the server's first, then the client's, in one play session;
+  6. rebuilds the game's `out/` with `FLAMEWORK_SCOPES` set to nothing, whatever the result, so a
+     scope in `.env.local` or in your shell can't come back. It exits with the first failing step's
+     code (127 for a tool it can't find), or else the rebuild's.
 - It needs Studio with "MCP server" on in its Assistant settings, and `lune` (`aftman.toml`). It
   exits non-zero when a test fails. Each realm's summary reads `N passed, M failed, K skipped` and
   lists every skipped test with its reason; a skip fails nothing unless the run has
@@ -27,10 +29,11 @@ For anything not covered here, read
 - Never put `FLAMEWORK_SCOPES=testing` in `.env` or `.env.local`. Every other build reads them
   (`bun run build`, `watch`, a release), and would ship the test host.
 - Extra arguments go to `flamework-test`:
-  - `bun run test --sections levels` runs one section, and `--sections coin/<test name>` one test.
+  - `bun run test --sections player-events` runs one section, and
+    `--sections player-events/<test name>` one test.
   - `--sections` is judged across both realms. A section only the server has runs there, and the
-    client lists it as `not among the client's sections: coin` without failing. An entry no realm
-    has fails the run: `MISS matched nothing in any realm: coins`.
+    client lists it as `not among the client's sections: welcome-service` without failing. An
+    entry no realm has fails the run: `MISS matched nothing in any realm: welcome`.
   - `--realm server` or `--realm client` runs one realm. There, an entry that realm lacks fails
     the run.
   - `--fail-on-skip` makes any skip fail the run, and its section head `FAIL`: for a run that
@@ -76,10 +79,10 @@ export class ShopTests implements OnStart {
 }
 ```
 
-- **Where:** `src/server/tests`, `src/client/tests` or `src/shared/tests`. A section in `shared`
-  runs once in each realm. The entry points register these folders with
-  `{ activeIn: ["testing"] }`, so a build without the scope never loads them. A new test folder
-  needs the same condition on its registration.
+- **Where:** `src/server/tests` or `src/shared/tests`. A section in `shared` runs once in each
+  realm. The entry points register these folders with `{ activeIn: ["testing"] }`, so a build
+  without the scope never loads them. A new test folder, such as `src/client/tests` for client-only
+  tests, needs the same condition on its registration in its realm's entry point.
 - **Shape:** a test file is a provider that injects what it tests, and defines its sections in
   `onStart`, before any yield. The same section name in several files is one section.
 - **Cleanup:** build instances under `scratch()`, a Workspace folder destroyed after each test, and
@@ -97,21 +100,30 @@ export class ShopTests implements OnStart {
   runs after a skip. Keep `skip` out of `pcall`, `expectThrows` and threads that outlive the
   test: guide 12, "Skipping a test".
 
-## Players, networking, components
+## Testing the plugin
 
-- **Players:**
-  - Sending to a player needs a real one: `waitForPlayer()` in `src/server/tests/players.ts`.
-    What the server sends that player during a test reaches the client in the same session.
-  - Where a player is only a key or an argument, use a stand-in: `scratch() as unknown as Player`.
-    Firing at a stand-in raises.
-- **Networking:**
-  - `Functions.x.predict(player, ...)` and `Events.x.predict(player, ...)` run the server's side
-    of a call here, with its guards and middleware.
-  - A middleware can also be tested on its own: call the factory with a spy for `processNext`.
-- **Components:**
-  - Tag a part under `scratch()`. `components.getComponent<T>(part)` builds the component at once
-    and returns it.
-  - Removals and other signals arrive a frame later under Deferred: use `eventually`.
+- **In a module of its own,** for a fresh roster and options of the test's choosing, extinguished
+  by `defer` after the test. `src/shared/tests/player-events.ts` does this in `igniteWithPlugin`:
+
+  ```ts
+  Flamework.createModule()
+    .includePlugin(createPlayerEventsPlugin({ announceExisting }))
+    .registerClassProvider(JoinRecorder)
+    .ignite();
+  ```
+
+  A test that extinguishes the module itself makes the `defer` skip it: `extinguish` raises on
+  a module already extinguished.
+- **Providers only those modules register** live in `src/shared/fixtures/`, outside every folder
+  an entry point registers, so the game's own modules never pick them up. A fixture class still
+  needs its `@Provider()`: `observe` only matches a decorated class.
+- **Through the game,** a test injects one of the game's own providers that uses the plugin, as
+  `src/server/tests/welcome-service.ts` does: the plugin there is the one the game's module
+  includes.
+- **Players:** `waitForPlayer()` in `src/shared/fixtures/players.ts` returns the play session's
+  player, on the server once it has joined and on the client the local one. Where a player is only
+  a key or an argument, use a stand-in: `scratch() as unknown as Player`.
+- What the plugin announces arrives on threads of their own: wait for it with `eventually`.
 
 ## The test place
 

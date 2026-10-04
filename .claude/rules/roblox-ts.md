@@ -1,6 +1,7 @@
 ---
 paths:
   - "src/**/*.{ts,tsx}"
+  - "package/src/**/*.ts"
 ---
 
 # roblox-ts differences that bite

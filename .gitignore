@@ -1,4 +1,5 @@
-/node_modules
+# Every project's, the root's and package/'s.
+node_modules/
 
 # Build output: roblox-ts writes out/ and include/ (with Flamework's include/flamework/), and
 # Flamework writes flamework.build. Every build recreates them.
@@ -6,6 +7,10 @@
 /include
 /flamework.build
 *.tsbuildinfo
+
+# The package's build, which is published (package/package.json "files") but never committed.
+/package/out
+/package/flamework.build
 
 # Place files at the root, such as the place.rbxl that `bun run place` builds. A place kept in a
 # folder, such as a test place, can be committed. Studio's lock files never are.

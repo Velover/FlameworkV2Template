@@ -15,17 +15,31 @@
 		"moduleDetection": "force",
 		"strict": true,
 		"target": "ESNext",
-		"typeRoots": ["node_modules/@rbxts", "node_modules/@flamework-experimental"],
+		"typeRoots": [
+			"node_modules/@rbxts",
+			"node_modules/@flamework-experimental",
+			"node_modules/@your-scope"
+		],
 
 		// configurable
 		"rootDir": "src",
 		"outDir": "out",
 		"baseUrl": "src",
+		// package/ has a node_modules of its own, with links to the same packages. roblox-ts writes an
+		// import through the first link to a package that TypeScript met, which could be one in
+		// package/, outside the game's node_modules: these keep every import of a package the plugin
+		// also imports on the game's own link. Add a line for each package the plugin's typings import.
+		"paths": {
+			"@flamework-experimental/core": ["../node_modules/@flamework-experimental/core"],
+			"@rbxts/services": ["../node_modules/@rbxts/services"]
+		},
 
 		"plugins": [
 			{
 				"transform": "@flamework-experimental/transformer"
 			}
 		]
-	}
+	},
+	// Only the game: package/ is compiled on its own, by `rbxtsc -p package`.
+	"include": ["src"]
 }

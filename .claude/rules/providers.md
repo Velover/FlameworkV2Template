@@ -68,8 +68,8 @@ export class ShopService implements OnStart {
 
 ```ts
 Flamework.createModule()
+	.includePlugin(PlayerEventsPlugin)
 	.registerProviders("src/server/services")
-	.includePlugin(ComponentPlugin.fromPath("src/server/components"))
 	.ignite();
 ```
 

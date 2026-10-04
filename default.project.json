@@ -1,5 +1,5 @@
 {
-	"name": "flamework-template",
+	"name": "player-events",
 	"globIgnorePaths": ["**/package.json", "**/tsconfig.json"],
 	"tree": {
 		"$className": "DataModel",
@@ -20,6 +20,15 @@
 					},
 					"@flamework-experimental": {
 						"$path": "node_modules/@flamework-experimental"
+					},
+					"@your-scope": {
+						"$className": "Folder",
+						"player-events": {
+							"$className": "Folder",
+							"out": {
+								"$path": "node_modules/@your-scope/player-events/out"
+							}
+						}
 					}
 				}
 			},

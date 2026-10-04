@@ -1,22 +1,24 @@
 {
-	"name": "flamework-template",
+	"name": "flamework-plugin-template",
 	"version": "0.1.0",
 	"private": true,
-	"description": "A minimal Roblox game on Flamework v2: roblox-ts, Rojo, core, components and networking.",
+	"description": "A Flamework v2 plugin package (package/) and the game that tests it in Studio.",
+	"workspaces": ["package"],
 	"scripts": {
-		"build": "rbxtsc",
+		"build": "rbxtsc -p package && rbxtsc",
+		"build:package": "rbxtsc -p package",
 		"watch": "rbxtsc -w",
+		"watch:package": "rbxtsc -p package -w",
 		"serve": "rojo serve",
 		"place": "rojo build -o place.rbxl",
 		"test": "bun scripts/test.mjs",
-		"format": "prettier --write src"
+		"format": "prettier --write src package/src"
 	},
 	"dependencies": {
-		"@flamework-experimental/components": "2.0.0-alpha.5",
 		"@flamework-experimental/core": "2.0.0-alpha.6",
-		"@flamework-experimental/networking": "2.0.0-alpha.6",
 		"@flamework-experimental/testing": "2.0.0-alpha.6",
-		"@rbxts/services": "^1.6.0"
+		"@rbxts/services": "^1.6.0",
+		"@your-scope/player-events": "workspace:*"
 	},
 	"devDependencies": {
 		"@flamework-experimental/transformer": "2.0.0-alpha.7",

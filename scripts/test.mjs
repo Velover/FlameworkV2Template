@@ -1,10 +1,11 @@
-// `bun run test`: builds with the testing scope, runs the tests in Studio, then rebuilds with no
-// scope whatever happened, so out/ never keeps a build that hosts the tests (guide 12, "Setting
-// up"). Start it with `bun run test`, which puts node_modules/.bin on the PATH; run on its own,
-// `bun scripts/test.mjs` finds no rbxtsc, or a global one instead of the project's. Extra
-// arguments go to flamework-test, as in `bun run test --sections levels`. Ctrl+C is the
-// exception to "whatever happened": `bun run` ends this script at once, before the rebuild, and
-// flamework-test cleans up its own window and session.
+// `bun run test`: builds the plugin package, then the game with the testing scope, runs the tests in
+// Studio, then rebuilds the game with no scope whatever happened, so out/ never keeps a build that
+// hosts the tests (guide 12, "Setting up"). Start it with `bun run test`, which puts
+// node_modules/.bin on the PATH; run on its own, `bun scripts/test.mjs` finds no rbxtsc, or a global
+// one instead of the project's. Extra arguments go to flamework-test, as in
+// `bun run test --sections player-events`. Ctrl+C is the exception to "whatever happened":
+// `bun run` ends this script at once, before the rebuild, and flamework-test cleans up its own
+// window and session.
 
 /** Runs a command in the terminal. Returns its exit code, or undefined when it can't be started. */
 function run(command, env = process.env) {
@@ -19,7 +20,10 @@ function run(command, env = process.env) {
 	}
 }
 
-let code = run(["rbxtsc"], { ...process.env, FLAMEWORK_SCOPES: "testing" });
+// The package first: the game compiles against its typings and its flamework.build. A package has no
+// scope of its own, so the variable does not matter to it.
+let code = run(["rbxtsc", "-p", "package"]);
+if (code === 0) code = run(["rbxtsc"], { ...process.env, FLAMEWORK_SCOPES: "testing" });
 if (code === undefined) {
 	console.error(
 		"Nothing was built, and there is no rbxtsc to rebuild out/ with. Start the tests with " +
