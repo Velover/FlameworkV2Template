@@ -102,6 +102,11 @@ commands use npm; use bun here.
   rebuild, so `out/` keeps the test build: run `bun run build`. `flamework-test` still stops its
   play session and closes its Studio window, in the seconds after the prompt comes back. Every run
   leaves `test.rbxl` and `test.patched.rbxl` behind; they are git-ignored.
+- **How much to run:** match it to the change. `bun run build` after every change. A Studio run
+  takes minutes, so run only the sections the change touches (`bun run test --sections <section>`,
+  plus `--realm` when one realm is enough), and none for docs, comments or a rename inside one
+  file. The whole `bun run test`, and benchmarks if the game has any, only when the user asks, or
+  after you suggest it, saying why and how long it takes, and the user agrees.
 
 ## Flamework v2 rules
 
