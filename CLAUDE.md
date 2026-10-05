@@ -101,6 +101,11 @@ commands use npm; use bun here.
 - Whether the tests pass or fail, `bun run test` ends by rebuilding `out/` with `FLAMEWORK_SCOPES`
   set to nothing. Never put the scope in `.env` or `.env.local`: every other build reads them. A run
   stopped with Ctrl+C skips the rebuild, so `out/` keeps the test build: run `bun run build`.
+- **How much to run:** match it to the change. `bun run build` after every change. A Studio run
+  takes minutes, so run only the sections the change touches (`bun run test --sections player-events`,
+  plus `--realm` when one realm is enough), and none for docs, comments or a rename inside one
+  file. The whole `bun run test`, and benchmarks if the game has any, only when the user asks, or
+  after you suggest it, saying why and how long it takes, and the user agrees.
 
 ## Flamework v2 rules
 

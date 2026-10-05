@@ -13,6 +13,8 @@ For anything not covered here, read
 
 ## Running
 
+- Run only the sections the change touches, with `--sections`; the whole run only when the user
+  asks or agrees (`CLAUDE.md`, "How much to run").
 - `bun run test` (`scripts/test.mjs`) does six things:
   1. builds the plugin package (`rbxtsc -p package`);
   2. builds the game with `FLAMEWORK_SCOPES=testing`;
