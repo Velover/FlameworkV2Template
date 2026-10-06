@@ -62,6 +62,10 @@ tests are still compiled in, but nothing loads them.
 
 - **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
   [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
+- **Studio's window:** on Windows the run opens Studio on a hidden desktop of its own, so nothing
+  pops up and your focus stays where it is; `bun run test --show` opens it where you can watch. One
+  test run uses Studio at a time on the machine: while another project's run or window holds it, a
+  run waits, up to 300 seconds.
 - **One section:** `bun run test --sections levels` runs one section, in each realm that has it.
 - **Skips:** a test calls `skip(reason)` when something known only at run time rules it out, and
   `test.skip(name, body)` parks one. Each skip is listed with its reason, and fails the run only
@@ -82,7 +86,9 @@ The Flamework guides for the installed version are in
 `node_modules/@flamework-experimental/core/docs/guide/`. Start with `01-getting-started.md`. The
 Flamework website documents v1, most of which no longer applies.
 
-`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code.
+`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code. `CLAUDE.md` loads
+Flamework's own, which ship in core next to the guides (`docs/ai/`), and the rules add only what
+is specific to this template.
 
 ## Renaming the project
 

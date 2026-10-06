@@ -12,14 +12,14 @@
 		"format": "prettier --write src"
 	},
 	"dependencies": {
-		"@flamework-experimental/components": "2.0.0-alpha.5",
-		"@flamework-experimental/core": "2.0.0-alpha.6",
-		"@flamework-experimental/networking": "2.0.0-alpha.6",
-		"@flamework-experimental/testing": "2.0.0-alpha.6",
+		"@flamework-experimental/components": "2.0.0-alpha.8",
+		"@flamework-experimental/core": "2.0.0-alpha.8",
+		"@flamework-experimental/networking": "2.0.0-alpha.8",
+		"@flamework-experimental/testing": "2.0.0-alpha.8",
 		"@rbxts/services": "^1.6.0"
 	},
 	"devDependencies": {
-		"@flamework-experimental/transformer": "2.0.0-alpha.7",
+		"@flamework-experimental/transformer": "2.0.0-alpha.8",
 		"@rbxts/compiler-types": "^3.0.0-types.0",
 		"@rbxts/types": "^1.0.955",
 		"prettier": "^3.8.1",
