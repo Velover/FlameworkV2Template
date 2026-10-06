@@ -14,13 +14,13 @@
 		"access": "public"
 	},
 	"peerDependencies": {
-		"@flamework-experimental/core": "2.0.0-alpha.6"
+		"@flamework-experimental/core": "2.0.0-alpha.8"
 	},
 	"dependencies": {
 		"@rbxts/services": "^1.6.0"
 	},
 	"devDependencies": {
-		"@flamework-experimental/core": "2.0.0-alpha.6",
+		"@flamework-experimental/core": "2.0.0-alpha.8",
 		"@rbxts/compiler-types": "^3.0.0-types.0",
 		"@rbxts/types": "^1.0.955"
 	}

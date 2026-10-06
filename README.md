@@ -66,6 +66,10 @@ each realm's passed, failed and skipped tests. Last, whatever the result, it reb
 
 - **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
   [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
+- **Studio's window:** on Windows the run opens Studio on a hidden desktop of its own, so nothing
+  pops up and your focus stays where it is; `bun run test --show` opens it where you can watch. One
+  test run uses Studio at a time on the machine: while another project's run or window holds it, a
+  run waits, up to 300 seconds.
 - **Testing the plugin itself:** `src/shared/tests/player-events.ts` ignites a module of its own per
   test, with the plugin and the fixtures it needs, and extinguishes it afterwards. So each test
   gets a fresh plugin, with the options it wants.
@@ -119,4 +123,6 @@ The Flamework guides for the installed version are in
 `09-project-structure.md` and `07-macros.md` ("Paths") for what a published package may not do.
 The Flamework website documents v1, most of which no longer applies.
 
-`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code.
+`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code. `CLAUDE.md` loads
+Flamework's own, which ship in core next to the guides (`docs/ai/`), and the rules add only what
+is specific to this template.

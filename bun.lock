@@ -5,13 +5,13 @@
     "": {
       "name": "flamework-template",
       "dependencies": {
-        "@flamework-experimental/core": "2.0.0-alpha.6",
-        "@flamework-experimental/testing": "2.0.0-alpha.6",
+        "@flamework-experimental/core": "2.0.0-alpha.8",
+        "@flamework-experimental/testing": "2.0.0-alpha.8",
         "@rbxts/services": "^1.6.0",
         "@your-scope/player-events": "workspace:*",
       },
       "devDependencies": {
-        "@flamework-experimental/transformer": "2.0.0-alpha.7",
+        "@flamework-experimental/transformer": "2.0.0-alpha.8",
         "@rbxts/compiler-types": "^3.0.0-types.0",
         "@rbxts/types": "^1.0.955",
         "prettier": "^3.8.1",
@@ -26,21 +26,21 @@
         "@rbxts/services": "^1.6.0",
       },
       "devDependencies": {
-        "@flamework-experimental/core": "2.0.0-alpha.6",
+        "@flamework-experimental/core": "2.0.0-alpha.8",
         "@rbxts/compiler-types": "^3.0.0-types.0",
         "@rbxts/types": "^1.0.955",
       },
       "peerDependencies": {
-        "@flamework-experimental/core": "2.0.0-alpha.6",
+        "@flamework-experimental/core": "2.0.0-alpha.8",
       },
     },
   },
   "packages": {
-    "@flamework-experimental/core": ["@flamework-experimental/core@2.0.0-alpha.6", "", { "dependencies": { "@rbxts/maid": "^1.0.0-ts.1", "@rbxts/object-utils": "^1.0.4", "@rbxts/services": "^1.1.4", "@rbxts/signal": "^1.0.3", "@rbxts/t": "^3.1.0" } }, "sha512-rymOeThVIcXFu7aLokfUpyjtNd6xiy/UXwXJzFw79nLmNEanLfdjNE7g1+qnUk29n0yBhA9SdJOHl+izXAF74Q=="],
+    "@flamework-experimental/core": ["@flamework-experimental/core@2.0.0-alpha.8", "", { "dependencies": { "@rbxts/maid": "^1.0.0-ts.1", "@rbxts/object-utils": "^1.0.4", "@rbxts/services": "^1.1.4", "@rbxts/signal": "^1.0.3", "@rbxts/t": "^3.1.0" } }, "sha512-lyy6R2h+fFuqjSeYVH0j6MnVFEM2XEgwvn0o17+KR90MJF/WzvFXRiLYAUrqSHffIsFUWmY9uoBloRStg0/oBg=="],
 
-    "@flamework-experimental/testing": ["@flamework-experimental/testing@2.0.0-alpha.6", "", { "dependencies": { "@rbxts/services": "^1.1.5", "@rbxts/t": "^3.1.0" }, "peerDependencies": { "@flamework-experimental/core": "^2.0.0-alpha.0", "@flamework-experimental/transformer": "^2.0.0-alpha.0" }, "bin": { "flamework-test": "cli/src/cli.ts" } }, "sha512-RdbpfBPV+sbyqzaqPxwUuyRsVRInnznTuoGBiCFZV2KR7yXG790QqA8BS4KQsX9epWBK4Bci4hcR3JM+GCbRcg=="],
+    "@flamework-experimental/testing": ["@flamework-experimental/testing@2.0.0-alpha.8", "", { "dependencies": { "@rbxts/services": "^1.1.5", "@rbxts/t": "^3.1.0" }, "peerDependencies": { "@flamework-experimental/core": "^2.0.0-alpha.8", "@flamework-experimental/transformer": "^2.0.0-alpha.8" }, "bin": { "flamework-test": "cli/src/cli.ts" } }, "sha512-FGBYxABbl00LZeihLyb3Go3gbr0Q/5BTFkQUdoX1/6lz8n1H3EcKCXqMqUcuUuJCHPXOZoXEunYOXsxx9ZQHig=="],
 
-    "@flamework-experimental/transformer": ["@flamework-experimental/transformer@2.0.0-alpha.7", "", { "dependencies": { "@roblox-ts/path-translator": "^1.1.0", "@roblox-ts/rojo-resolver": "^1.1.0", "ajv": "^8.6.3", "chalk": "^4.1.2", "fs-extra": "^10.0.0", "glob": "9.3", "hashids": "^2.2.8", "normalize-package-data": "^3.0.3", "uuid": "^8.3.2" }, "peerDependencies": { "typescript": "*" } }, "sha512-DE5kC74sPkXcQ54hcoAfJjvCy3MGE7ceaozb1KOaeT6H0+gx6iIWfXwbrbd1KgwjZ08bG40PjPOxJP6xTzkoYQ=="],
+    "@flamework-experimental/transformer": ["@flamework-experimental/transformer@2.0.0-alpha.8", "", { "dependencies": { "@roblox-ts/path-translator": "^1.1.0", "@roblox-ts/rojo-resolver": "^1.1.0", "ajv": "^8.6.3", "chalk": "^4.1.2", "fs-extra": "^10.0.0", "glob": "9.3", "hashids": "^2.2.8", "normalize-package-data": "^3.0.3", "uuid": "^8.3.2" }, "peerDependencies": { "typescript": "*" } }, "sha512-SpsXwXnl3cB3TNg24Ki0kwMZEfTFLDfvbVCZZGvE2qY+K2JAbhHTTwAhTBestM0A+M0b3pvCnq+phfVbMnKXMw=="],
 
     "@rbxts/compiler-types": ["@rbxts/compiler-types@3.0.0-types.0", "", {}, "sha512-VGOHJPoL7+56NTatMGqQj3K7xWuzEV+aP4QD5vZiHu+bcff3kiTmtoadaF6NkJrmwfFAvbsd4Dg764ZjWNceag=="],
 
