@@ -48,7 +48,9 @@ The Flamework guides for the installed version are in
 `node_modules/@flamework-experimental/core/docs/guide/`. Start with `01-getting-started.md`. The
 Flamework website documents v1, most of which no longer applies.
 
-`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code.
+`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code. `CLAUDE.md` loads
+Flamework's own, which ship in core next to the guides (`docs/ai/`), and the rules add only what
+is specific to this template.
 
 ## Renaming the project
 
