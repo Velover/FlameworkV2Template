@@ -49,6 +49,21 @@ use bun here.
 - Publish from `package/` with `bun publish`, after setting its `version`; `prepublishOnly` builds
   it.
 
+## Long-running commands: don't poll
+
+- Run a long command (a test run, Studio, a long build) in the background, and let its completion
+  notification wake you. Don't keep reading its output, or sleeping and looking again.
+- No polling: it costs a lot of usage. Two health checks of your own are allowed if needed
+  (reading its output, a status command): one near the start (did it start properly) and one
+  midway. More only when the user asks for them. The user asking how it is going is not one of
+  yours.
+- Next to a long command, start a watcher in the background that ends, and so wakes you, when
+  something goes wrong: the first failure line, output silent for minutes (a hang), or the command
+  dying without finishing. One background watcher is not polling; checking again and again
+  yourself is.
+- Commands that finish in a minute or two need none of this: run them in the foreground, with a
+  timeout.
+
 ## Where things live
 
 | Path                           | Holds                                                                 |
