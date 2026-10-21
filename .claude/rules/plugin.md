@@ -26,8 +26,9 @@ does.
 
 ## This package's setup
 
-- **Versions:** core is a peer dependency and a dev dependency, both exactly 2.0.0-alpha.8, the
-  version the root pins. Change both with the root's, to one release.
+- **Versions:** core is a peer dependency as `^2.0.0-beta.0` (any 2.x from this release on, which
+  the stability promise covers) and a dev dependency at exactly 2.0.0-beta.0, the version the root
+  pins. Change both with the root's, to one release.
 - **Pins:** `package/tsconfig.json` `paths` pins `@flamework-experimental/core` and
   `@rbxts/services` to `package/node_modules`, and the root `tsconfig.json` pins the same two to the
   game's `node_modules`. A new import the package shares with a dependency, or that its typings

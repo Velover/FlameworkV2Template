@@ -1,6 +1,6 @@
 # Flamework Plugin Template
 
-A Flamework v2 (alpha) plugin, published as an npm package, with a game that installs it and runs
+A Flamework v2 (beta) plugin, published as an npm package, with a game that installs it and runs
 its tests in Roblox Studio. The example plugin, `@your-scope/player-events`, tells providers about
 players joining and leaving and gives them a roster of the players in the game; replace it with
 yours.
@@ -67,9 +67,9 @@ each realm's passed, failed and skipped tests. Last, whatever the result, it reb
 - **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
   [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
 - **Studio's window:** on Windows the run opens Studio on a hidden desktop of its own, so nothing
-  pops up and your focus stays where it is; `bun run test --show` opens it where you can watch. One
-  test run uses Studio at a time on the machine: while another project's run or window holds it, a
-  run waits, up to 300 seconds.
+  pops up and your focus stays where it is; `bun run test --show-windows` opens it where you can
+  watch. One test run uses Studio at a time on the machine: while another project's run or window
+  holds it, a run waits, up to 300 seconds.
 - **Testing the plugin itself:** `src/shared/tests/player-events.ts` ignites a module of its own per
   test, with the plugin and the fixtures it needs, and extinguishes it afterwards. So each test
   gets a fresh plugin, with the options it wants.

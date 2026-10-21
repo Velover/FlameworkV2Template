@@ -24,11 +24,11 @@ use bun here.
 - roblox-ts 3.0.0 (`rbxtsc`) compiles `package/src/` to `package/out/`, and `src/` to `out/`.
   TypeScript is pinned to 5.5.3, the version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the game's place from `default.project.json`.
-- **Flamework v2 alpha:** `@flamework-experimental/core` and `testing`, and
-  `@flamework-experimental/transformer`, the tsconfig plugin, all pinned exactly at 2.0.0-alpha.8.
+- **Flamework v2 beta:** `@flamework-experimental/core` and `testing`, and
+  `@flamework-experimental/transformer`, the tsconfig plugin, all pinned exactly at 2.0.0-beta.0.
   Every package shares one version; upgrade them together.
-  - The package names core as a peer dependency and as a dev dependency, both exactly
-    2.0.0-alpha.8: change both with the root's.
+  - The package names core as a peer dependency as `^2.0.0-beta.0` and as a dev dependency at
+    exactly 2.0.0-beta.0: change both with the root's.
 - Package manager: bun, one lockfile (`bun.lock`). The root is a workspace with `package/` in it.
 
 ## Commands
@@ -44,7 +44,7 @@ use bun here.
   commas.
 - Add a package the plugin uses to `package/package.json`, from `package/` (`bun add <name>`), and
   pin it in `package/tsconfig.json` `paths`; one the game alone uses goes in the root. Add a
-  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-alpha.8`, the version the
+  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-beta.0`, the version the
   others have.
 - Publish from `package/` with `bun publish`, after setting its `version`; `prepublishOnly` builds
   it.
@@ -106,8 +106,8 @@ Read `node_modules/@flamework-experimental/core/docs/ai/testing.md` before you w
 - **Unattended:** give a run nobody watches `--keep-awake`: while the display sleeps,
   RenderStepped stops and `onRender` tests fail.
 - **Hidden window:** on Windows the run opens Studio on a hidden desktop, so nothing shows and the
-  user's focus is left alone. Add `--show` only when the user wants to watch, or when a hidden
-  window `never showed up on the MCP proxy`.
+  user's focus is left alone. Add `--show-windows` only when the user wants to watch, or when a
+  hidden window `never showed up on the MCP proxy`.
 - **The Studio lock:** one `flamework-test` command uses Studio at a time on the machine. A run
   that finds another project's window or run holding it says whose and waits, up to 300 seconds,
   then fails naming it. Wait or ask the user; never close a window you did not open.
