@@ -18,9 +18,9 @@ use bun here.
 - roblox-ts 3.0.0 (`rbxtsc`) compiles `src/` to Luau in `out/`. TypeScript is pinned to 5.5.3, the
   version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the place from `default.project.json`.
-- **Flamework v2 alpha:** `@flamework-experimental/core`, `components` and `networking`, and
+- **Flamework v2 beta:** `@flamework-experimental/core`, `components` and `networking`, and
   `@flamework-experimental/transformer`, the tsconfig plugin, all pinned exactly at
-  2.0.0-alpha.8. Every package shares one version; upgrade them together.
+  2.0.0-beta.0. Every package shares one version; upgrade them together.
 - Package manager: bun, one lockfile (`bun.lock`).
 
 ## Commands
@@ -32,7 +32,7 @@ use bun here.
   Build first: the project maps `out/` and `include/`.
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
-  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-alpha.8`, the version the
+  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-beta.0`, the version the
   others have. It needs no mapping: `default.project.json` maps the whole scope.
 
 ## Long-running commands: don't poll

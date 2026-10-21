@@ -1,6 +1,6 @@
 # Flamework Template
 
-A minimal Roblox game on Flamework v2 (alpha) and roblox-ts, with Flamework's core, components and
+A minimal Roblox game on Flamework v2 (beta) and roblox-ts, with Flamework's core, components and
 networking. A small coin example shows each part; replace it with your game.
 
 ## Start
