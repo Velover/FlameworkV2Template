@@ -30,7 +30,13 @@ if (code === undefined) {
 // test.rbxl, not place.rbxl: the place `bun run place` builds never holds the tests.
 if (code === 0) code = run(["rojo", "build", "-o", "test.rbxl"]) ?? 127;
 if (code === 0) {
-	const args = ["test", "test.rbxl", "--original", "tests/place.rbxlx", ...process.argv.slice(2)];
+	const args = [
+		"test",
+		"test.rbxl",
+		"--original-place",
+		"tests/place.rbxlx",
+		...process.argv.slice(2),
+	];
 	code = run(["flamework-test", ...args]) ?? 127;
 }
 

@@ -1,6 +1,6 @@
 # Flamework Template
 
-A minimal Roblox game on Flamework v2 (alpha) and roblox-ts, with Flamework's core, components and
+A minimal Roblox game on Flamework v2 (beta) and roblox-ts, with Flamework's core, components and
 networking. A small coin example shows each part; replace it with your game.
 
 ## Start
@@ -63,9 +63,9 @@ tests are still compiled in, but nothing loads them.
 - **Needs:** Studio with "MCP server" turned on in its Assistant settings, and
   [Lune](https://lune-org.github.io/docs) (in `aftman.toml`).
 - **Studio's window:** on Windows the run opens Studio on a hidden desktop of its own, so nothing
-  pops up and your focus stays where it is; `bun run test --show` opens it where you can watch. One
-  test run uses Studio at a time on the machine: while another project's run or window holds it, a
-  run waits, up to 300 seconds.
+  pops up and your focus stays where it is; `bun run test --show-windows` opens it where you can
+  watch. One test run uses Studio at a time on the machine: while another project's run or window
+  holds it, a run waits, up to 300 seconds.
 - **One section:** `bun run test --sections levels` runs one section, in each realm that has it.
 - **Skips:** a test calls `skip(reason)` when something known only at run time rules it out, and
   `test.skip(name, body)` parks one. Each skip is listed with its reason, and fails the run only

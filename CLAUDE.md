@@ -18,9 +18,9 @@ use bun here.
 - roblox-ts 3.0.0 (`rbxtsc`) compiles `src/` to Luau in `out/`. TypeScript is pinned to 5.5.3, the
   version roblox-ts 3.0.0 bundles.
 - Rojo 7.7 (`aftman.toml`) builds the place from `default.project.json`.
-- **Flamework v2 alpha:** `@flamework-experimental/core`, `components`, `networking` and `testing`,
+- **Flamework v2 beta:** `@flamework-experimental/core`, `components`, `networking` and `testing`,
   and `@flamework-experimental/transformer`, the tsconfig plugin, all pinned exactly at
-  2.0.0-alpha.8. Every package shares one version; upgrade them together.
+  2.0.0-beta.0. Every package shares one version; upgrade them together.
   - `testing` is in every build, not only test builds: both entry points include its
     `TestingPlugin`, which stays inert without the `testing` scope. A mismatched version breaks
     the game too.
@@ -36,7 +36,7 @@ use bun here.
 - `bun run test` runs the tests in Studio; see [Tests](#tests).
 - `bun run format` runs Prettier on `src/`: tabs, a width of 100, trailing commas.
 - Add packages with `bun add <name>`, or `bun add -d <name>` for build tools. Add a
-  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-alpha.8`, the version the
+  `@flamework-experimental/*` package with `bun add --exact <name>@2.0.0-beta.0`, the version the
   others have. It needs no mapping: `default.project.json` maps the whole scope.
 
 ## Long-running commands: don't poll
@@ -99,8 +99,8 @@ Read `node_modules/@flamework-experimental/core/docs/ai/testing.md` before you w
 - **Unattended:** give a run nobody watches `--keep-awake`: while the display sleeps,
   RenderStepped stops and `onRender` tests fail.
 - **Hidden window:** on Windows the run opens Studio on a hidden desktop, so nothing shows and the
-  user's focus is left alone. Add `--show` only when the user wants to watch, or when a hidden
-  window `never showed up on the MCP proxy`.
+  user's focus is left alone. Add `--show-windows` only when the user wants to watch, or when a
+  hidden window `never showed up on the MCP proxy`.
 - **The Studio lock:** one `flamework-test` command uses Studio at a time on the machine. A run
   that finds another project's window or run holding it says whose and waits, up to 300 seconds,
   then fails naming it. Wait or ask the user; never close a window you did not open.
