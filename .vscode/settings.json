@@ -1,6 +1,7 @@
 {
 	"typescript.tsdk": "node_modules/typescript/lib",
 	"files.eol": "\n",
+	"files.associations": { "flamework.config.json": "jsonc" },
 	"[typescript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode",
 		"editor.formatOnSave": true
