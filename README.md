@@ -134,4 +134,5 @@ claude plugin install flamework@flamework-experimental --scope project
 
 (or `/plugin install flamework@flamework-experimental` in a Claude Code session). When you upgrade
 Flamework, move the marketplace's `ref` in `.claude/settings.json` to the new release's tag
-(`claude-plugin-v<version>`).
+(`claude-plugin-v<version>`), then run
+`claude plugin update flamework@flamework-experimental --scope project`.

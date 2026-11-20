@@ -16,8 +16,9 @@ it: once the folder is trusted, each person runs
 (the rules, for any Flamework work), `flamework:plugins` (a plugin, and a package that other
 games install, which is what this repository is about: use it for any work on `package/`),
 `flamework:providers`, `flamework:components`, `flamework:networking` and `flamework:testing`. If
-they are missing, ask the user to install the plugin. Upgrading Flamework moves the tag to the new
-release's (`claude-plugin-v<version>`).
+they are missing, ask the user to install the plugin. Upgrading Flamework moves the `ref` in
+`.claude/settings.json` to the new release's tag (`claude-plugin-v<version>`); then
+`claude plugin update flamework@flamework-experimental --scope project` updates the installed copy.
 
 The guides they point to are in the plugin, and in
 `node_modules/@flamework-experimental/core/docs/guide/` for the installed version. Most of their
