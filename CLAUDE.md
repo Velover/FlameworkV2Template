@@ -85,7 +85,7 @@ install commands use npm; use bun here.
 
 ## Tests
 
-Read `node_modules/@flamework-experimental/core/docs/ai/testing.md` before you write or run tests;
+Use the `flamework:testing` skill before you write or run tests;
 `.claude/rules/testing.md` adds what this template does.
 
 - `bun run test` (`scripts/test.mjs`) builds with `FLAMEWORK_SCOPES=testing` and makes `test.rbxl`.
@@ -100,7 +100,7 @@ Read `node_modules/@flamework-experimental/core/docs/ai/testing.md` before you w
   in `.env` or `.env.local`: every other build reads them. A run stopped with Ctrl+C skips the
   rebuild, so `out/` keeps the test build: run `bun run build`. Every run leaves `test.rbxl` and
   `test.patched.rbxl` behind; they are git-ignored.
-- **How much to run:** as "How much to test" in the imported flamework.md says. A Studio run of
+- **How much to run:** as "How much to test" in the `flamework:flamework` skill says. A Studio run of
   one feature is `bun run test --sections <section>` (`coin`, `coin-service`, `throttle`,
   `coin-spin`, `levels`), plus `--realm` when one realm is enough. The whole `bun run test` only
   when the user asks or agrees.

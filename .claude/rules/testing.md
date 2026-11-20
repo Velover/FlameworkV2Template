@@ -6,8 +6,8 @@ paths:
 
 # Tests in this template
 
-Read `node_modules/@flamework-experimental/core/docs/ai/testing.md` first: it has the rules for
-writing and running tests. This file adds only what this template does.
+Use the `flamework:testing` skill first: it has the rules for writing and running tests.
+This file adds only what this template does.
 
 ## `bun run test`
 
