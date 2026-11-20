@@ -13,8 +13,9 @@ it: once the folder is trusted, each person runs
 `/plugin install flamework@flamework-experimental` in a session). Its skills: `flamework:flamework`
 (the rules, for any Flamework work), `flamework:providers`, `flamework:components`,
 `flamework:networking`, `flamework:testing` and `flamework:plugins`. If they are missing, ask the
-user to install the plugin. Upgrading Flamework moves the tag to the new release's
-(`claude-plugin-v<version>`).
+user to install the plugin. Upgrading Flamework moves the `ref` in `.claude/settings.json` to the
+new release's tag (`claude-plugin-v<version>`); then
+`claude plugin update flamework@flamework-experimental --scope project` updates the installed copy.
 
 The guides they point to are in the plugin, and in
 `node_modules/@flamework-experimental/core/docs/guide/` for the installed version. Most of their
