@@ -48,9 +48,18 @@ The Flamework guides for the installed version are in
 `node_modules/@flamework-experimental/core/docs/guide/`. Start with `01-getting-started.md`. The
 Flamework website documents v1, most of which no longer applies.
 
-`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code. `CLAUDE.md` loads
-Flamework's own, which ship in core next to the guides (`docs/ai/`), and the rules add only what
-is specific to this template.
+`CLAUDE.md` and `.claude/rules/` are the instructions for Claude Code that are specific to this
+template. Flamework's own are the `flamework` Claude Code plugin, made of skills, with the guides
+inside: `.claude/settings.json` registers its marketplace (`flamework-experimental`, pinned to a
+release's tag) and enables it. Settings don't install it: once you trust the folder, run once
+
+```sh
+claude plugin install flamework@flamework-experimental --scope project
+```
+
+(or `/plugin install flamework@flamework-experimental` in a Claude Code session). When you upgrade
+Flamework, move the marketplace's `ref` in `.claude/settings.json` to the new release's tag
+(`claude-plugin-v<version>`).
 
 ## Renaming the project
 

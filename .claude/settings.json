@@ -1,0 +1,14 @@
+{
+	"extraKnownMarketplaces": {
+		"flamework-experimental": {
+			"source": {
+				"source": "github",
+				"repo": "Velover/ExperimentalFlameworkV2",
+				"ref": "claude-plugin-v2.0.0-beta.1"
+			}
+		}
+	},
+	"enabledPlugins": {
+		"flamework@flamework-experimental": true
+	}
+}

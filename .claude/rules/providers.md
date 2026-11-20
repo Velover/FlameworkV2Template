@@ -9,7 +9,7 @@ paths:
 
 # Providers, entry points and config in this template
 
-Read `node_modules/@flamework-experimental/core/docs/ai/providers.md` first: it has the rules.
+Use the `flamework:providers` skill first: it has the rules.
 This file adds only what this template does.
 
 - The `provider`, `service` and `controller` snippets (`.vscode/flamework-snippets.code-snippets`)

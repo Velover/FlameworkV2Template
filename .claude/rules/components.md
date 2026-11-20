@@ -5,7 +5,7 @@ paths:
 
 # Components in this template
 
-Read `node_modules/@flamework-experimental/core/docs/ai/components.md` first: it has the rules.
+Use the `flamework:components` skill first: it has the rules.
 This file adds only what this template does.
 
 - The `component` snippet (`.vscode/flamework-snippets.code-snippets`) writes the minimal form:
