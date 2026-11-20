@@ -5,9 +5,8 @@ paths:
 
 # The plugin package (`package/`)
 
-`node_modules/@flamework-experimental/core/docs/ai/plugins.md`, which `CLAUDE.md` loads, has the
-rules for a plugin and for a package other games install. This file adds only what this template
-does.
+Use the `flamework:plugins` skill first: it has the rules for a plugin and for a package other
+games install. This file adds only what this template does.
 
 ## The example
 
