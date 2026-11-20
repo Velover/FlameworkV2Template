@@ -7,17 +7,21 @@ example plugin, `@your-scope/player-events` (providers implement `OnPlayerJoined
 
 ## Flamework
 
-Flamework's own instructions ship in core, so they match the installed version. These lines load
-the rules every project follows, and those for a plugin and a package that other games install,
-which is what this repository is about (after `bun install`; without `node_modules` they load
-nothing):
+Flamework's own instructions are the `flamework` Claude Code plugin, which `.claude/settings.json`
+registers (the `flamework-experimental` marketplace, pinned by the tag
+`claude-plugin-v2.0.0-beta.1`, the first release that has one) and enables. Settings don't install
+it: once the folder is trusted, each person runs
+`claude plugin install flamework@flamework-experimental --scope project` once (or
+`/plugin install flamework@flamework-experimental` in a session). Its skills: `flamework:flamework`
+(the rules, for any Flamework work), `flamework:plugins` (a plugin, and a package that other
+games install, which is what this repository is about: use it for any work on `package/`),
+`flamework:providers`, `flamework:components`, `flamework:networking` and `flamework:testing`. If
+they are missing, ask the user to install the plugin. Upgrading Flamework moves the tag to the new
+release's (`claude-plugin-v<version>`).
 
-@node_modules/@flamework-experimental/core/docs/ai/flamework.md
-
-@node_modules/@flamework-experimental/core/docs/ai/plugins.md
-
-The guides they point to are for the installed version. Most of their install commands use npm;
-use bun here.
+The guides they point to are in the plugin, and in
+`node_modules/@flamework-experimental/core/docs/guide/` for the installed version. Most of their
+install commands use npm; use bun here.
 
 ## Stack
 
@@ -35,7 +39,7 @@ use bun here.
 
 - `bun install`.
 - `bun run build` runs `rbxtsc -p package`, then `rbxtsc`: both must pass the check described under
-  "Building" in the imported flamework.md. `bun run build:package` builds the package alone.
+  "Building" in the `flamework:flamework` skill. `bun run build:package` builds the package alone.
 - `bun run watch:package` and `bun run watch` rebuild the package and the game on change.
 - `bun run serve` runs `rojo serve` to sync into Studio, and `bun run place` builds `place.rbxl`.
   Build first: the project maps `out/`, `include/` and the package's `out/`.
