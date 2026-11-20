@@ -5,13 +5,20 @@ example (press F to spawn a coin, touch it to collect it) is there to be replace
 
 ## Flamework
 
-Flamework's own instructions ship in core, so they match the installed version. This line loads
-them (after `bun install`; without `node_modules` it loads nothing):
+Flamework's own instructions are the `flamework` Claude Code plugin, which `.claude/settings.json`
+registers (the `flamework-experimental` marketplace, pinned by the tag
+`claude-plugin-v2.0.0-beta.1`, the first release that has one) and enables. Settings don't install
+it: once the folder is trusted, each person runs
+`claude plugin install flamework@flamework-experimental --scope project` once (or
+`/plugin install flamework@flamework-experimental` in a session). Its skills: `flamework:flamework`
+(the rules, for any Flamework work), `flamework:providers`, `flamework:components`,
+`flamework:networking`, `flamework:testing` and `flamework:plugins`. If they are missing, ask the
+user to install the plugin. Upgrading Flamework moves the tag to the new release's
+(`claude-plugin-v<version>`).
 
-@node_modules/@flamework-experimental/core/docs/ai/flamework.md
-
-The guides they point to are for the installed version. Most of their install commands use npm;
-use bun here.
+The guides they point to are in the plugin, and in
+`node_modules/@flamework-experimental/core/docs/guide/` for the installed version. Most of their
+install commands use npm; use bun here.
 
 ## Stack
 
@@ -29,7 +36,8 @@ use bun here.
 ## Commands
 
 - `bun install`.
-- `bun run build` runs `rbxtsc`, the check described under "Building" in the imported flamework.md.
+- `bun run build` runs `rbxtsc`, the check described under "Building" in the
+  `flamework:flamework` skill.
 - `bun run watch` runs `rbxtsc -w`, which rebuilds on change.
 - `bun run serve` runs `rojo serve` to sync into Studio, and `bun run place` builds `place.rbxl`.
   Build first: the project maps `out/` and `include/`.
